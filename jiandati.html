@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CMG实验 简答题自测</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: #f5f7fa;
+    color: #333;
+    padding: 30px 20px;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  h1 {
+    text-align: center;
+    font-size: 28px;
+    color: #1a3c6e;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 32px;
+  }
+  .experiment {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .exp-header {
+    background: #1a3c6e;
+    color: #fff;
+    padding: 14px 24px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+  }
+  .exp-header:hover { background: #234d8a; }
+  .exp-header .toggle { font-size: 14px; opacity: 0.8; }
+  .exp-body {
+    display: none;
+    padding: 20px 24px 24px;
+  }
+  .question {
+    margin-bottom: 32px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 24px;
+  }
+  .question:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .q-title {
+    font-weight: 600;
+    font-size: 15px;
+    color: #1a3c6e;
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+  .q-text {
+    font-size: 14.5px;
+    line-height: 1.7;
+    margin-bottom: 12px;
+    color: #444;
+  }
+  .answer-area {
+    width: 100%;
+    min-height: 100px;
+    padding: 12px 14px;
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+    font-family: inherit;
+    resize: vertical;
+    background: #fafbfc;
+    color: #333;
+    margin-bottom: 10px;
+    transition: border-color 0.2s;
+  }
+  .answer-area:focus {
+    outline: none;
+    border-color: #1a3c6e;
+    background: #fff;
+  }
+  .answer-area::placeholder { color: #b0b7c3; }
+  .btn-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .btn-show {
+    padding: 7px 18px;
+    background: #e8edf5;
+    border: 1px solid #c5d0e0;
+    border-radius: 6px;
+    color: #1a3c6e;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    font-family: inherit;
+  }
+  .btn-show:hover {
+    background: #d0dced;
+    border-color: #a0b5d0;
+  }
+  .btn-show.active {
+    background: #1a3c6e;
+    border-color: #1a3c6e;
+    color: #fff;
+  }
+  .answer {
+    display: none;
+    background: #f0f5ff;
+    border-left: 4px solid #1a3c6e;
+    padding: 12px 16px;
+    border-radius: 4px 8px 8px 4px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #2c3e50;
+    margin-top: 6px;
+    flex: 1;
+  }
+  .answer.show { display: block; }
+  .answer strong { color: #1a3c6e; }
+  .answer ul { margin: 4px 0 4px 18px; }
+  .answer li { margin-bottom: 4px; }
+  .footer {
+    text-align: center;
+    color: #aaa;
+    font-size: 13px;
+    margin-top: 40px;
+    padding-bottom: 20px;
+  }
+  @media (max-width: 600px) {
+    body { padding: 16px 12px; }
+    .exp-body { padding: 16px; }
+    .exp-header { font-size: 16px; padding: 12px 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>CMG实验 简答题自测</h1>
+<p class="subtitle">点击实验标题展开/收起 · 在文本框中作答 · 点击"显示答案"查看参考答案</p>
+
+<!-- ==================== 实验一 ==================== -->
+<div class="experiment">
+  <div class="exp-header" onclick="toggleExp(this)">
+    <span>实验一 SDS-碱裂解法提取质粒DNA</span>
+    <span class="toggle">▶</span>
+  </div>
+  <div class="exp-body">
+    <div class="question">
+      <div class="q-title">1.</div>
+      <div class="q-text">SDS-碱裂解法提取质粒DNA的基本原理是什么？为什么质粒DNA能留在上清中而染色体DNA被沉淀？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          <strong>原理：</strong>利用质粒DNA与染色体DNA在碱变性后复性能力不同进行分离。<br><br>
+          <strong>具体过程：</strong><br>
+          （1）菌体裂解：SDS破坏胞膜，使蛋白质变性；NaOH提供强碱性环境（pH12），使DNA双链变成单链。<br>
+          （2）中和：加入高浓度酸性乙酸钾（溶液III），pH降至中性。<br>
+          （3）分离：<strong>质粒DNA（分子小、环状）</strong>在冷却后能快速正确复性，保持溶解状态，留在上清中；<strong>染色体DNA（线性、巨大）</strong>无法完全复性，与变性的蛋白质、SDS形成不溶性网络沉淀，离心后沉于底部。
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-title">2.</div>
+      <div class="q-text">溶液II不能剧烈震荡且处理时间不能超过5分钟的原因是什么？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          <strong>①不能剧烈震荡：</strong>否则染色体DNA断裂，产生的小片段染色体DNA会进入上清，污染质粒。<br>
+          <strong>②处理时间不能超过5分钟：</strong>否则质粒DNA也会不可逆变性，降低得率。
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-title">3.</div>
+      <div class="q-text">试分析提取的质粒发生基因组DNA污染的可能原因。</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          可能原因包括：<br>
+          （1）加入溶液II后剧烈振荡：染色体DNA断裂，进入上清液，污染质粒。<br>
+          （2）溶液II处理时间过长：质粒DNA可能部分断裂，降低得率；基因组DNA变性并降解，进入上清液。<br>
+          （3）加入溶液III中和后离心不充分：沉淀不能有效沉降，吸取上清时易吸入漂浮的碎片。<br>
+          （4）菌体过量或裂解不充分：未充分变性的基因组DNA片段留在上清。<br>
+          （5）溶液III未充分混匀：局部pH偏高，染色体DNA无法形成有效沉淀，可溶的基因组DNA片段进入上清。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 实验二 ==================== -->
+<div class="experiment">
+  <div class="exp-header" onclick="toggleExp(this)">
+    <span>实验二 核酸的纯度和浓度鉴定</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="exp-body">
+    <div class="question">
+      <div class="q-title">1.</div>
+      <div class="q-text">核酸发生降解对核酸定量有什么影响？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          （1）长链断裂成短链片段甚至寡核苷酸，仍含有碱基，会在260nm处产生吸收。<br>
+          （2）A₂₆₀偏高（单链DNA/寡核苷酸的吸光系数比双链高）。<br>
+          （3）打乱A₂₆₀/A₂₈₀、A₂₆₀/A₂₃₀比值，无法真实反映蛋白质、盐类污染程度。<br>
+          （4）降解片段在后续实验中失效（完整分子才能提供正确的模板或表达）。
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-title">2.</div>
+      <div class="q-text">如何判断提取的DNA样品中是否有RNA污染？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          <strong>（1）紫外分光光度法：</strong>纯DNA的A₂₆₀/A₂₈₀比值应为1.8–2.0。若比值显著高于2.0，则提示可能存在RNA污染（但也需排除酚残留、胍盐污染等干扰，需结合A₂₆₀/A₂₃₀综合判断）。<br><br>
+          <strong>（2）凝胶电泳：</strong>取少量DNA样品进行琼脂糖凝胶电泳。质粒DNA通常呈超螺旋、开环、线状等特异的条带；若在靠近前沿处出现模糊的弥散带或明显的小分子条带，且能被RNase处理消除，则证明有RNA污染。<br><br>
+          <strong>（3）RNase消化实验：</strong>将样品分为两份，一份加入RNase A，另一份不处理。再次进行电泳比较：如果处理后的RNA条带消失，则确认污染。
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-title">3.</div>
+      <div class="q-text">如果PCR没有获得目的DNA产物，试分析原因及解决方法。</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          <table style="width:100%;border-collapse:collapse;font-size:14px;">
+            <tr><td><strong>原因</strong></td><td><strong>建议</strong></td></tr>
+            <tr><td>质粒过早被洗脱</td><td>确保Buffer W2中加入适量95-100%无水乙醇</td></tr>
+            <tr><td>洗脱效率低（膜过干）</td><td>缩短制备管抽干时间；洗脱液/去离子水预热并延长洗脱时间</td></tr>
+            <tr><td>质粒丢失</td><td>重新划甘油菌培养；改用羧苄青霉素</td></tr>
+            <tr><td>S2过期；菌量过多；裂解不完全</td><td>使用后需立即拧紧瓶盖；减少菌体用量</td></tr>
+            <tr><td>加入Buffer S1后菌体未完全悬起</td><td>充分涡旋/捶打菌体沉淀至完全悬浮</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 实验三 ==================== -->
+<div class="experiment">
+  <div class="exp-header" onclick="toggleExp(this)">
+    <span>实验三 核酸的完整性及PCR产物鉴定</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="exp-body">
+    <div class="question">
+      <div class="q-title">1.</div>
+      <div class="q-text">影响电泳的因素有哪些？电压过高对电泳有什么影响？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          <strong>影响因素：</strong>电场参数（电压、电泳时间）、凝胶特性（浓度、均匀性）、缓冲液条件（pH、离子强度）、样品特性（分子大小与构象、电荷密度、纯度）、温度控制、染色与检测方法。<br><br>
+          <strong>电压过高的影响：</strong><br>
+          ①产热过多，导致凝胶变形或DNA变性，如"微笑效应"；<br>
+          ②DNA变性：局部过热可能使双链DNA解开成单链，影响分离效果；<br>
+          ③分辨率下降：高电压使大分子与小分子之间的迁移差异减小，条带压缩；<br>
+          ④电泳时间不足可能导致分离不完全，过长可能使小分子扩散。
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-title">2.</div>
+      <div class="q-text">质粒DNA有哪些常见构象？其电泳迁移速率如何？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          三种常见构象（按迁移速率从快到慢）：<br>
+          <strong>①超螺旋（共价闭合环状）：</strong>结构紧密，无断裂，迁移<strong>最快</strong>。<br>
+          <strong>②线性：</strong>双链完全断裂，呈线性结构，迁移速度介于超螺旋和开环之间。<br>
+          <strong>③开环：</strong>单链断裂导致松弛环状，迁移<strong>最慢</strong>。
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-title">3.</div>
+      <div class="q-text">上样缓冲液的主要成分及作用是什么？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          <strong>①指示剂（溴酚蓝、二甲苯青）：</strong>指示电泳进行程度，当指示剂移动到凝胶适当位置时即可停止电泳；估计DNA片段的位置。<br>
+          <strong>②密度剂（甘油、蔗糖或聚蔗糖400）：</strong>增加样品密度，使样品沉降到点样孔底部。<br>
+          <strong>③螯合剂（EDTA）：</strong>螯合二价金属离子，抑制核酸酶活性，保护DNA不被降解。<br>
+          <strong>④缓冲剂（Tris-HCl）：</strong>提供合适离子强度和pH值。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 实验四 ==================== -->
+<div class="experiment">
+  <div class="exp-header" onclick="toggleExp(this)">
+    <span>实验四 乳酸脱氢酶（LDH）活性测定</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="exp-body">
+    <div class="question">
+      <div class="q-title">1.</div>
+      <div class="q-text">本实验为什么分别设定标准空白和测定空白？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          <strong>①测定空白：</strong>包含样品（肝匀浆）但不加NAD⁺，酶促反应无法启动。用于扣除样品本身及试剂中可能存在的非特异性干扰物质（如内源性丙酮酸、蛋白质颜色等）在440nm处的吸光度。<br><br>
+          <strong>②标准空白：</strong>不加丙酮酸标准液，但加入其他所有试剂。用于扣除2,4-二硝基苯肼与剩余底物（乳酸）或NaOH等产生的非特异性颜色对标准管吸光度的贡献。<br><br>
+          设定两个空白能够独立校正样品背景和试剂背景，使计算得到的净吸光度（A₁−A₂）和（A₃−A₄）分别只反映酶促反应产生的丙酮酸和标准管中加入的丙酮酸，从而提高定量准确性。
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-title">2.</div>
+      <div class="q-text">2,4-二硝基苯肼在本实验中的作用是什么？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          2,4-二硝基苯肼是<strong>显色试剂</strong>。在酸性条件下与丙酮酸反应，生成丙酮酸二硝基苯腙。当加入NaOH使溶液呈碱性时，该腙类化合物呈现稳定的红棕色，在440nm处有最大吸收。它将反应产物丙酮酸转化为可用分光光度法定量检测的有色物质，从而间接测定LDH活性。
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-title">3.</div>
+      <div class="q-text">样品稀释倍数对酶活性测定结果有何影响？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          <strong>①稀释倍数过大：</strong>酶促反应速率显著降低，15min内生成的丙酮酸量非常少，导致测定管净吸光度（A₁−A₂）很小，甚至接近空白管的吸光度波动范围，结果误差大。<br><br>
+          <strong>②稀释倍数过小：</strong>酶量过多，底物被饱和，部分LDH酶未参与催化反应，测得酶活性单位偏低。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 实验五 ==================== -->
+<div class="experiment">
+  <div class="exp-header" onclick="toggleExp(this)">
+    <span>实验五 LDH同工酶谱分析</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="exp-body">
+    <div class="question">
+      <div class="q-title">1.</div>
+      <div class="q-text">在非变性PAGE中，LDH同工酶的迁移速率主要由哪些因素决定？为什么LDH1的迁移速率通常快于LDH5？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          <strong>迁移速率的决定因素（按重要性排序）：</strong><br>
+          ①<strong>净电荷</strong>（最主要）：在pH 8.3的电泳缓冲液中，净负电荷越多，迁移越快。<br>
+          ②<strong>分子大小</strong>：分子量越大，阻力越大，迁移越慢。<br>
+          ③<strong>分子形状</strong>：紧凑型分子比不规则分子迁移阻力小。<br><br>
+          <strong>LDH1快于LDH5的原因：</strong><br>
+          LDH同工酶由H亚基（心脏型）和M亚基（肌肉型）组成。H亚基的氨基酸序列中含有更多的酸性氨基酸残基（天冬氨酸、谷氨酸），因此在pH 8.3的缓冲液中电离后携带更多的负电荷。LDH1(H₄)、LDH2(H₃M)、LDH3(H₂M₂)、LDH4(HM₃)、LDH5(M₄)的H亚基数目依次递减，迁移速率也依次递减：<strong>LDH1 &gt; LDH2 &gt; LDH3 &gt; LDH4 &gt; LDH5</strong>。
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-title">2.</div>
+      <div class="q-text">为什么LDH同工酶分析必须在非变性条件下进行？如果误加了SDS会有什么影响？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          <strong>非变性条件的必要性：</strong><br>
+          ①保持天然构象和活性：使LDH保持四聚体结构和天然构象，电泳后仍具有酶催化活性，能通过底物显色反应被检测到。<br>
+          ②基于电荷的分离：只有天然状态的蛋白质才保留其固有的表面电荷差异。<br><br>
+          <strong>误加SDS的影响：</strong><br>
+          ①<strong>对分离的影响：</strong>SDS与蛋白质结合后使所有蛋白质都带大量负电荷，同工酶之间的电荷差异被完全消除，迁移速率只取决于分子量大小。而LDH五种同工酶的分子量几乎相同（140 kDa），因此无法分离成独立条带。<br>
+          ②<strong>活性检测的影响：</strong>SDS使蛋白质变性，破坏LDH的四聚体结构，使亚基解聚并丧失催化活性，染色步骤将无法检测到任何酶活性条带。
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-title">3.</div>
+      <div class="q-text">若LDH同工酶染色后条带模糊、弥散，可能是由哪些操作失误导致的？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          <strong>①制胶环节：</strong>凝胶聚合不均匀、凝胶中存在气泡、凝胶浓度与样品不匹配。<br>
+          <strong>②样品处理：</strong>样品中盐离子浓度过高、样品降解（反复冻融）、上样量过大。<br>
+          <strong>③电泳：</strong>电压过高（产热多导致凝胶局部升温）、电泳时间过长（已分离条带继续扩散）。<br>
+          <strong>④染色：</strong>染色液配制错误、染色时间过长或光照下进行（甲臜沉淀过度扩散或非特异性显色）。<br>
+          <strong>⑤其他：</strong>凝胶在染色前残留电泳缓冲液或SDS，干扰酶活性或显色反应。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 实验六 ==================== -->
+<div class="experiment">
+  <div class="exp-header" onclick="toggleExp(this)">
+    <span>实验六 重组质粒表达的鉴定——免疫印迹（Western Blot）</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="exp-body">
+    <div class="question">
+      <div class="q-title">1.</div>
+      <div class="q-text">Western Blot为什么通常使用一抗和二抗两步抗体孵育，而非直接标记一抗？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          <strong>（1）放大信号：</strong>二抗是针对一抗的抗体，一个一抗分子可被多个二抗分子结合。二抗上偶联有酶（HRP），每个靶蛋白分子能结合多个酶分子，信号被放大，极大提高了检测灵敏度。<br><br>
+          <strong>（2）降低非特异性背景，提高特异性：</strong>二抗只识别一抗的Fc片段，漂洗后未结合的二抗被去除，显著降低非特异性。<br><br>
+          <strong>（3）通用性与灵活性：</strong>同一种二抗可检测多种一抗，无需为每个靶蛋白单独制备标记抗体。<br><br>
+          <strong>（4）成本效益显著：</strong>直接标记一抗成本高昂，二抗作为通用试剂可长期使用。
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-title">2.</div>
+      <div class="q-text">如果Western Blot观察到高背景信号（靶蛋白条带以外区域也出现明显显色），可能的原因是什么？如何解决？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          <strong>①封闭不充分：</strong>封闭液浓度太低或封闭时间太短。→ 使用5%脱脂奶粉或3–5% BSA，室温封闭1h或4℃过夜。<br>
+          <strong>②抗体浓度过高：</strong>抗体使用浓度高或孵育过久。→ 滴定实验找到最佳稀释比，严格控制孵育时间。<br>
+          <strong>③漂洗不充分：</strong>漂洗次数不够、时间过短或漂洗液浓度过低。→ 4次×10–15min漂洗，TBS-T中Tween-20浓度为0.1%。<br>
+          <strong>④膜处理不当：</strong>转膜后未干燥、膜被直接接触、膜与凝胶之间有气泡。→ 全程戴手套操作，滚压棒赶气泡。<br>
+          <strong>⑤显色过度：</strong>显色液浓度过高或显色时间过长。→ 新鲜配制ECL显色液，控制曝光时间。<br>
+          <strong>⑥抗体质量差：</strong>抗体特异性差或反复冻融导致聚集。→ 更换优质抗体，分装保存避免反复冻融。
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-title">3.</div>
+      <div class="q-text">如果不连续SDS-PAGE中分离胶与浓缩胶的缓冲液pH不同，其作用分别是什么？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          <strong>浓缩胶缓冲液（0.5 mol/L Tris-Cl, pH 6.8，弱酸性）：</strong><br>
+          提供弱酸性pH环境，在该pH下电泳缓冲液中的甘氨酸解离少，迁移率低；氯离子（Cl⁻）迁移率高。二者间形成低电导带，产生高电压梯度，迫使蛋白质在此区域聚集浓缩，形成窄带（<strong>浓缩效应</strong>）。<br><br>
+          <strong>分离胶缓冲液（1.5 mol/L Tris-Cl, pH 8.8，偏碱性）：</strong><br>
+          移动界面进入分离胶后，pH升高，甘氨酸完全解离为Gly⁻，泳动速率迅速增加，电压梯度下降。此时蛋白质不再被浓缩，根据分子量大小分离（<strong>分子筛效应</strong>）。高浓度Tris提供强缓冲能力，维持恒定碱性环境，保证蛋白质始终带负电并稳定迁移。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 实验七 ==================== -->
+<div class="experiment">
+  <div class="exp-header" onclick="toggleExp(this)">
+    <span>实验七 亲和层析纯化GST融合蛋白与纯度鉴定——SDS-PAGE</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="exp-body">
+    <div class="question">
+      <div class="q-title">1.</div>
+      <div class="q-text">亲和层析纯化GST融合蛋白的基本原理是什么？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          利用生物分子间所具有的<strong>专一而又可逆的亲和力</strong>使蛋白质分离纯化。谷胱甘肽（Glu）与GST之间具有特异性的作用力。将混合菌体蛋白与谷胱甘肽琼脂糖凝胶珠孵育，凝胶手臂上的Glu可以与GST蛋白特异性结合，通过反复洗涤除去不能与Glu结合的杂蛋白而获得琼脂糖珠结合的GST纯蛋白。进一步使用<strong>还原型谷胱甘肽（GSH）洗脱</strong>时，游离的Glu竞争性取代琼脂糖珠上Glu与GST的结合，从而洗脱获得纯化的GST蛋白。
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-title">2.</div>
+      <div class="q-text">在SDS-PAGE中，当分离胶加完后需在其上加一层水，为什么？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          加水的作用：<strong>使分离胶上沿平直，并隔绝空气，促使凝胶聚合过程。</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-title">3.</div>
+      <div class="q-text">在GST融合蛋白亲和层析过程中，如何优化洗脱条件以提高纯化效率？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          <strong>①谷胱甘肽浓度：</strong>若回收率低可提高浓度，或采用梯度洗脱。游离GSH与固定相GSH竞争结合GST，浓度过低竞争不足，洗脱不完全；浓度过高可能引起非特异性蛋白共洗脱。<br>
+          <strong>②pH值：</strong>洗脱不完全时可提高pH，但需监控蛋白稳定性。pH升高可降低GST对GSH的亲和力，促进洗脱；pH过高可能导致蛋白变性。<br>
+          <strong>③洗脱液体流速：</strong>降低流速或浸泡后再洗脱。低流速增加接触时间，使竞争充分；流速过快会导致洗脱峰变宽、回收率下降。<br>
+          <strong>④温度：</strong>4°C适合热不稳定蛋白；室温可提高扩散效率但需监控活性。<br>
+          <strong>⑤添加辅助成分：</strong>加入DTT/β-巯基乙醇防止氧化；蛋白酶抑制剂防止降解。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 实验八 ==================== -->
+<div class="experiment">
+  <div class="exp-header" onclick="toggleExp(this)">
+    <span>实验八 凝胶过滤层析——牛血清白蛋白脱盐实验</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="exp-body">
+    <div class="question">
+      <div class="q-title">1.</div>
+      <div class="q-text">凝胶过滤层析的基本原理是什么？为什么大分子先被洗脱，小分子后被洗脱？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          <strong>原理：</strong>利用具有网状结构的凝胶的<strong>分子筛</strong>作用，根据被分离物质的分子<strong>大小不同</strong>来进行分离。<br><br>
+          <strong>洗脱顺序：</strong><br>
+          ①<strong>大分子先洗脱：</strong>比凝胶孔径大的分子不能进入凝胶孔内，在凝胶颗粒之间的空隙向下移动，路径短，先被洗脱出来；<br>
+          ②<strong>小分子后洗脱：</strong>比网孔小的分子能不同程度自由出入凝胶孔，在柱内经过的路程长，移动速度慢，后被洗脱出来。<br><br>
+          <strong>本实验验证：</strong>BSA（分子量约66kDa，大分子）无法进入凝胶孔隙，先洗脱；NaCl（约58Da，小分子）能自由进入凝胶孔隙，路径更长，后洗脱。因此盐峰明显滞后于BSA峰，实现蛋白与盐的有效分离。
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-title">2.</div>
+      <div class="q-text">一种溶液中可能含有A蛋白（pI=4.3, MW=58kD）和B蛋白（pI=6.2, MW=29kD），可采用哪些层析方法进行分离？请说明原因。</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          <strong>（1）离子交换层析（基于电荷差异）：</strong><br>
+          选择缓冲液pH 5.5，此时A蛋白（pI=4.3 &lt; pH=5.5）带负电荷；B蛋白（pI=6.2 &gt; pH=5.5）带正电荷。若使用阴离子交换剂，带负电的A蛋白结合到柱上，带正电的B蛋白不结合直接流出；随后通过提高盐浓度或改变pH可将A蛋白洗脱下来。<br><br>
+          <strong>（2）凝胶过滤层析（基于分子大小差异）：</strong><br>
+          选择合适分离范围的凝胶介质（如Sephadex G-75，分离范围3,000–80,000 Da）。A蛋白（58 kDa）先被洗脱，B蛋白（29 kDa）后被洗脱，洗脱峰完全分开。
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-title">3.</div>
+      <div class="q-text">离子交换层析的原理是什么？如何改变条件实现洗脱？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          <strong>原理：</strong>利用离子交换剂对各种离子的亲和力不同。固定相是带有大量电荷的离子交换剂（阳离子交换树脂带负电、阴离子交换树脂带正电），流动相是一定pH值和离子强度的电解质溶液。基于分子与带电固定相之间的电荷相互作用进行分离。<br><br>
+          <strong>洗脱方法：</strong>通过<strong>增加离子强度</strong>或<strong>改变pH值</strong>，改变分子与固定相的结合强度，实现选择性洗脱分离。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 实验九 ==================== -->
+<div class="experiment">
+  <div class="exp-header" onclick="toggleExp(this)">
+    <span>实验九 遗传学实验：染色体制备与观察</span>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="exp-body">
+    <div class="question">
+      <div class="q-title">1.</div>
+      <div class="q-text">小鼠骨髓细胞染色体制备过程中，秋水仙素和低渗处理的作用分别是什么？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          <strong>秋水仙素的作用：</strong>与微管蛋白二聚体结合，阻止微管蛋白转换，使细胞停滞于<strong>有丝分裂中期</strong>，从而积累大量分裂期细胞以便观察染色体。<br><br>
+          <strong>低渗液（0.075mol/L KCl）的作用：</strong>低渗处理（37℃、30min）使细胞充分膨胀、体积增大，减少染色体之间的缠绕和重叠，利于后续滴片时染色体分散。低渗不足则细胞膨胀不够，滴片时难以破裂；低渗过度则细胞过早破裂，染色体不能完整保留。
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-title">2.</div>
+      <div class="q-text">什么是巴氏小体？不同核型个体中巴氏小体的数量有何差异？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          <strong>巴氏小体（X染色质）：</strong>在哺乳类动物中，正常雌性个体两条X染色体中只有一条活化，另一条固缩失活。固缩状态的X染色质能被碱性染料深染，紧贴核膜内侧，形态常呈三角形、馒头形等。<br><br>
+          <strong>不同核型的巴氏小体数量：</strong><br>
+          正常女性（XX）：20%–50%体细胞可见<strong>1个</strong><br>
+          正常男性（XY）：无（阳性率&lt;5%）<br>
+          XXY（克氏综合征）：<strong>1个</strong><br>
+          XXX：<strong>2个</strong><br>
+          XO（特纳综合征）：无
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-title">3.</div>
+      <div class="q-text">人外周血淋巴细胞染色体制备中，PHA的作用是什么？为什么外周血淋巴细胞需要PHA刺激才能用于染色体制备？</div>
+      <textarea class="answer-area" placeholder="在此作答..."></textarea>
+      <div class="btn-row">
+        <button class="btn-show" onclick="toggleAnswer(this)">显示答案</button>
+        <div class="answer">
+          <strong>PHA（植物凝集素）的作用：</strong>刺激淋巴细胞转化为淋巴母细胞，并开始进行有丝分裂。<br><br>
+          <strong>原因：</strong>外周血中的淋巴细胞几乎都是处在G₀期或G₁期，一般情况下是不分裂的。只有在培养基中加入PHA后，淋巴细胞受到刺激才能转化为淋巴母细胞并进入分裂状态。短期培养后，经秋水仙素处理、低渗和固定，即可得到大量的有丝分裂细胞用于染色体制备和观察。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  内容基于CMG实验复习资料 · 仅供自测学习使用
+</div>
+
+</div>
+
+<script>
+function toggleExp(header) {
+  var body = header.nextElementSibling;
+  var toggle = header.querySelector('.toggle');
+  if (body.style.display === 'none') {
+    body.style.display = 'block';
+    toggle.textContent = '▼';
+  } else {
+    body.style.display = 'none';
+    toggle.textContent = '▶';
+  }
+}
+
+function toggleAnswer(btn) {
+  var answer = btn.parentElement.querySelector('.answer');
+  if (answer.classList.contains('show')) {
+    answer.classList.remove('show');
+    btn.textContent = '显示答案';
+    btn.classList.remove('active');
+  } else {
+    answer.classList.add('show');
+    btn.textContent = '隐藏答案';
+    btn.classList.add('active');
+  }
+}
+</script>
+</body>
+</html>
